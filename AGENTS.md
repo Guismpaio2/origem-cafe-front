@@ -67,7 +67,7 @@ Regras:
 
 ## 5. Requisitos que afetam o front-end
 
-Os IDs abaixo estão no documento do lab05. Cite o ID ao implementar.
+Os IDs abaixo estão no documento de requisitos do projeto. Cite o ID ao implementar.
 
 - **RU001 / RF003** — catálogo com foto, preço, origem, notas sensoriais, moagem e tamanho.
 - **RN002** — um café só entra no carrinho depois de escolher moagem **e** tamanho. Bloqueie o botão enquanto faltar algum deles.
