@@ -4,7 +4,6 @@ Interface web do e-commerce da **Origem Café**, desenvolvido como projeto final
 
 - **Autor:** Guilherme Carneiro Sampaio — matrícula 2024003567
 - **Repositório da API:** `origem-cafe-api` (back-end em Node.js + MongoDB)
-- **Documento de requisitos:** `lab05/lab05_2024003567_ecot11a.pdf`
 
 ## Sobre o projeto
 
