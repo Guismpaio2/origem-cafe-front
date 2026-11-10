@@ -22,7 +22,7 @@ Instruções para qualquer agente de IA que trabalhe neste repositório. Leia an
 | Estilo          | CSS Modules + variáveis CSS (tokens)      |
 | Lint            | oxlint (`npm run lint`)                   |
 
-Diretrizes visuais (incluindo o padrão "scroll flow") ainda **não** foram definidas. Não invente um sistema de design; quando o autor instalar as skills de design, siga-as.
+A direção visual do MVP foi definida na Aula 6 (tokens em `src/shared/styles/tokens.css`: paleta, fontes e espaçamento). O padrão "scroll flow" ainda **não** foi definido. Use os tokens; não crie cores ou fontes soltas.
 
 ## 3. Comandos
 
@@ -122,6 +122,7 @@ Use esta tabela ao explicar conceitos novos ao autor.
 
 ## 9. Estado atual
 
-- Projeto criado com Vite (template `react-ts`) e build validado.
-- Ainda é o template padrão do Vite (`App.tsx` de demonstração). Substituir por essa estrutura é o próximo passo guiado.
-- Próximas etapas: instalar React Router, criar a estrutura de pastas, montar o layout com tokens, depois o catálogo consumindo `GET /api/v1/products`.
+- Estrutura por features pronta: `app/` (providers e rotas), `features/` (catálogo, carrinho, auth), `shared/` (api, tokens, hooks, componentes).
+- Telas do MVP: catálogo por origem (`/`), produto com moagem e peso (`/produtos/:id`), carrinho (`/carrinho`), entrar (`/entrar`) e criar conta com consentimento LGPD (`/cadastro`).
+- Build, lint e navegação em 360 px e 1280 px verificados.
+- Pendente: checkout, agendamento, carrinho no servidor (merge no login), perfil, painel admin, avaliações e assinaturas.
