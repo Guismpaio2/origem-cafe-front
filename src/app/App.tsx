@@ -4,6 +4,9 @@ import { CatalogoPage } from '../features/catalogo/CatalogoPage';
 import { ProdutoPage } from '../features/catalogo/ProdutoPage';
 import { LoginPage } from '../features/auth/LoginPage';
 import { RegisterPage } from '../features/auth/RegisterPage';
+import { CheckoutPage } from '../features/checkout/CheckoutPage';
+import { OrderPage } from '../features/pedidos/OrderPage';
+import { PedidosPage } from '../features/pedidos/PedidosPage';
 import { Layout } from '../shared/components/Layout';
 import { NotFoundPage } from '../shared/components/NotFoundPage';
 import { AuthProvider } from './providers/AuthProvider';
@@ -22,6 +25,9 @@ export function App() {
               <Route path="carrinho" element={<CarrinhoPage />} />
               <Route path="entrar" element={<LoginPage />} />
               <Route path="cadastro" element={<RegisterPage />} />
+              <Route path="checkout" element={<CheckoutPage />} />
+              <Route path="pedidos" element={<PedidosPage />} />
+              <Route path="pedidos/:id" element={<OrderPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

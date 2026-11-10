@@ -28,9 +28,14 @@ export function Layout() {
             <span className={styles.visuallyHidden}>itens</span>
           </NavLink>
           {auth.status === 'authenticated' ? (
-            <button type="button" className={styles.linkButton} onClick={auth.logout}>
-              Sair
-            </button>
+            <>
+              <NavLink to="/pedidos" className={styles.navLink}>
+                Pedidos
+              </NavLink>
+              <button type="button" className={styles.linkButton} onClick={auth.logout}>
+                Sair
+              </button>
+            </>
           ) : (
             <NavLink to="/entrar" className={styles.navLink}>
               Entrar
