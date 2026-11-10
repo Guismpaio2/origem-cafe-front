@@ -1,0 +1,32 @@
+/* Tokens de design: todas as cores, fontes e espaçamentos do projeto saem daqui. */
+:root {
+  color-scheme: light;
+
+  /* Cores */
+  --ink: #1d211c; /* texto principal (contraste > 14:1 sobre o papel) */
+  --paper: #eceee8; /* fundo */
+  --paper-raised: #f7f8f4; /* superfícies de formulário */
+  --cerrado: #2d5b44; /* ação principal (verde do Cerrado) */
+  --cerrado-ink: #ffffff; /* texto sobre a cor de ação */
+  --cereja: #9b2f25; /* erro e alerta */
+  --muted: #56605a; /* texto secundário (contraste > 5:1) */
+  --rule: #c3cac0; /* filetes que separam as linhas */
+  --focus: #1d211c; /* contorno de foco do teclado */
+
+  /* Tipografia */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-text: 'Schibsted Grotesk', system-ui, sans-serif;
+
+  /* Escala de espaçamento */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  /* Largura de leitura e raio */
+  --measure: 72rem;
+  --radius: 4px;
+}
