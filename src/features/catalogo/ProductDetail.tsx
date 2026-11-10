@@ -9,7 +9,7 @@ import {
   precoMinimo,
   variantePorEscolha,
 } from './catalogo.rules';
-import { VariantPicker } from './VariantPicker';
+import { VariantPicker } from '../../shared/components/VariantPicker';
 import styles from './ProdutoPage.module.css';
 
 interface ProductDetailProps {

@@ -66,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
+      token,
       status,
       login: async (email, senha) => {
         const result = await loginRequest(email, senha);
@@ -88,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setStatus('anonymous');
       },
     }),
-    [user, status],
+    [user, token, status],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

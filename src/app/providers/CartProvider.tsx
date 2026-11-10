@@ -27,6 +27,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addItem: (item) => dispatch({ type: 'add', item: { ...item, quantidade: 1 } }),
       setQuantity: (sku, quantidade) => dispatch({ type: 'setQuantity', sku, quantidade }),
       removeItem: (sku) => dispatch({ type: 'remove', sku }),
+      clear: () => dispatch({ type: 'clear' }),
     };
   }, [state.items]);
 

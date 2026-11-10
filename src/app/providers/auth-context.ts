@@ -3,6 +3,7 @@ import type { RegisterInput, UserDto } from '../../features/auth/auth.api';
 
 export interface AuthContextValue {
   user: UserDto | null;
+  token: string | null;
   status: 'checking' | 'anonymous' | 'authenticated';
   login: (email: string, senha: string) => Promise<void>;
   register: (input: RegisterInput) => Promise<void>;
