@@ -8,6 +8,10 @@ import { CheckoutPage } from '../features/checkout/CheckoutPage';
 import { OrderPage } from '../features/pedidos/OrderPage';
 import { PedidosPage } from '../features/pedidos/PedidosPage';
 import { ContaPage } from '../features/conta/ContaPage';
+import { AdminLayout } from '../features/admin/AdminLayout';
+import { AdminDashboard } from '../features/admin/AdminDashboard';
+import { AdminProducts } from '../features/admin/AdminProducts';
+import { AdminOrders } from '../features/admin/AdminOrders';
 import { Layout } from '../shared/components/Layout';
 import { NotFoundPage } from '../shared/components/NotFoundPage';
 import { AuthProvider } from './providers/AuthProvider';
@@ -28,6 +32,11 @@ export function App() {
               <Route path="cadastro" element={<RegisterPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route path="conta" element={<ContaPage />} />
+              <Route path="admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="produtos" element={<AdminProducts />} />
+                <Route path="pedidos" element={<AdminOrders />} />
+              </Route>
               <Route path="pedidos" element={<PedidosPage />} />
               <Route path="pedidos/:id" element={<OrderPage />} />
               <Route path="*" element={<NotFoundPage />} />

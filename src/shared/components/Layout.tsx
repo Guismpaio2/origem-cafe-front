@@ -35,6 +35,11 @@ export function Layout() {
               <NavLink to="/conta" className={styles.navLink}>
                 Conta
               </NavLink>
+              {auth.user?.role === 'admin' && (
+                <NavLink to="/admin" className={styles.navLink}>
+                  Painel
+                </NavLink>
+              )}
               <button type="button" className={styles.linkButton} onClick={auth.logout}>
                 Sair
               </button>
