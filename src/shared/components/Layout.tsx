@@ -32,6 +32,9 @@ export function Layout() {
               <NavLink to="/pedidos" className={styles.navLink}>
                 Pedidos
               </NavLink>
+              <NavLink to="/conta" className={styles.navLink}>
+                Conta
+              </NavLink>
               <button type="button" className={styles.linkButton} onClick={auth.logout}>
                 Sair
               </button>

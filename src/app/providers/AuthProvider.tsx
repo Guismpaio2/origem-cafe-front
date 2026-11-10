@@ -82,6 +82,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(result.user);
         setStatus('authenticated');
       },
+      refreshUser: async () => {
+        if (!token) return;
+        setUser(await fetchCurrentUser(token));
+      },
       logout: () => {
         writeToken(null);
         setToken(null);

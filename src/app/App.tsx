@@ -7,6 +7,7 @@ import { RegisterPage } from '../features/auth/RegisterPage';
 import { CheckoutPage } from '../features/checkout/CheckoutPage';
 import { OrderPage } from '../features/pedidos/OrderPage';
 import { PedidosPage } from '../features/pedidos/PedidosPage';
+import { ContaPage } from '../features/conta/ContaPage';
 import { Layout } from '../shared/components/Layout';
 import { NotFoundPage } from '../shared/components/NotFoundPage';
 import { AuthProvider } from './providers/AuthProvider';
@@ -26,6 +27,7 @@ export function App() {
               <Route path="entrar" element={<LoginPage />} />
               <Route path="cadastro" element={<RegisterPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
+              <Route path="conta" element={<ContaPage />} />
               <Route path="pedidos" element={<PedidosPage />} />
               <Route path="pedidos/:id" element={<OrderPage />} />
               <Route path="*" element={<NotFoundPage />} />

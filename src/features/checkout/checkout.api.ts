@@ -27,3 +27,17 @@ export async function fetchPickupSlots(date: string): Promise<string[]> {
   );
   return response.data.slots;
 }
+
+export interface CepLookup {
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
+// RF009: a API consulta o ViaCEP; o navegador só recebe o endereço pronto.
+export async function lookupCep(cep: string): Promise<CepLookup> {
+  const response = await apiRequest<{ data: CepLookup }>(`/shipping/cep/${encodeURIComponent(cep)}`);
+  return response.data;
+}

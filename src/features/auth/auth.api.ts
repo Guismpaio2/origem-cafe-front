@@ -1,11 +1,23 @@
 import { apiRequest } from '../../shared/api/http';
 
+export interface SavedAddress {
+  id: string;
+  apelido: string;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
 export interface UserDto {
   id: string;
   nome: string;
   email: string;
   role: 'cliente' | 'admin';
-  addresses: unknown[];
+  addresses: SavedAddress[];
 }
 
 export interface AuthResult {

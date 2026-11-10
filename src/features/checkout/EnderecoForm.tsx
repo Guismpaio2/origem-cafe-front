@@ -1,4 +1,5 @@
-import type { ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
+import { lookupCep } from './checkout.api';
 import type { AddressInput } from '../pedidos/pedidos.api';
 import styles from './checkout.module.css';
 
@@ -9,6 +10,28 @@ interface EnderecoFormProps {
 
 // Campos de endereço para entrega. A busca por CEP (ViaCEP) entra depois (RF009).
 export function EnderecoForm({ value, onChange }: EnderecoFormProps) {
+  const [cepMessage, setCepMessage] = useState<string | null>(null);
+
+  // Ao sair do campo CEP, preenche rua, bairro, cidade e UF. Número e complemento continuam com a pessoa.
+  async function buscarCep() {
+    const digits = value.cep.replace(/\D/g, '');
+    if (digits.length !== 8) return;
+    setCepMessage('Buscando o CEP…');
+    try {
+      const found = await lookupCep(digits);
+      onChange({
+        ...value,
+        cep: found.cep,
+        logradouro: found.logradouro || value.logradouro,
+        bairro: found.bairro || value.bairro,
+        cidade: found.cidade || value.cidade,
+        uf: found.uf || value.uf,
+      });
+      setCepMessage(null);
+    } catch (caught) {
+      setCepMessage(caught instanceof Error ? caught.message : 'Não foi possível buscar o CEP.');
+    }
+  }
   const update = (field: keyof AddressInput) => (event: ChangeEvent<HTMLInputElement>) =>
     onChange({ ...value, [field]: event.target.value });
 
@@ -16,7 +39,8 @@ export function EnderecoForm({ value, onChange }: EnderecoFormProps) {
     <div className={styles.grid}>
       <div className={styles.field}>
         <label htmlFor="end-cep">CEP</label>
-        <input id="end-cep" autoComplete="postal-code" inputMode="numeric" placeholder="00000-000" value={value.cep} onChange={update('cep')} />
+        <input id="end-cep" autoComplete="postal-code" inputMode="numeric" placeholder="00000-000" value={value.cep} onChange={update('cep')} onBlur={buscarCep} aria-describedby="end-cep-ajuda" />
+        {cepMessage && <p id="end-cep-ajuda" className={styles.help}>{cepMessage}</p>}
       </div>
       <div className={styles.field}>
         <label htmlFor="end-logradouro">Rua, avenida ou praça</label>
