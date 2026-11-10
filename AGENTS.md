@@ -120,9 +120,8 @@ Use esta tabela ao explicar conceitos novos ao autor.
 | Pipes (`\| currency`)                | Função de formatação chamada no JSX                   |
 | Change detection                     | Renderização por estado: o componente re-renderiza quando `useState`/`useReducer` muda |
 
-## 9. Estado atual
+## 9. Estado atual (10/11/2026)
 
-- Estrutura por features pronta: `app/` (providers e rotas), `features/` (catálogo, carrinho, auth), `shared/` (api, tokens, hooks, componentes).
-- Telas do MVP: catálogo por origem (`/`), produto com moagem e peso (`/produtos/:id`), carrinho (`/carrinho`), entrar (`/entrar`) e criar conta com consentimento LGPD (`/cadastro`).
-- Build, lint e navegação em 360 px e 1280 px verificados.
-- Pendente: checkout, agendamento, carrinho no servidor (merge no login), perfil, painel admin, avaliações e assinaturas.
+- Telas: catálogo por origem, produto com moagem e peso, carrinho (na API), checkout, pedidos, minha conta, clube mensal, avaliações e painel da equipe (com acesso restrito).
+- Verificado: build e lint sem erros; fluxos de navegador em `e2e/` (`npm run e2e:*`); auditoria de acessibilidade e desempenho (`npm run auditoria`).
+- Pendente: busca textual no catálogo, animações de rolagem e grão de café 3D (depois do MVP), e deploy no fim do projeto.
