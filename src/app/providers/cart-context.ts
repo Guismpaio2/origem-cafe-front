@@ -5,9 +5,9 @@ export interface CartContextValue {
   items: CartItem[];
   count: number;
   subtotalCentavos: number;
-  addItem: (item: Omit<CartItem, 'quantidade'>) => void;
-  setQuantity: (sku: string, quantidade: number) => void;
-  removeItem: (sku: string) => void;
+  addItem: (productId: string, sku: string) => Promise<void>;
+  setQuantity: (sku: string, quantidade: number) => Promise<void>;
+  removeItem: (sku: string) => Promise<void>;
   clear: () => void;
 }
 

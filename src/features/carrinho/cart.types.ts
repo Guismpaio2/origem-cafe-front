@@ -1,4 +1,5 @@
 // Um item do carrinho é uma variante concreta: produto + moagem + peso (RN002).
+// O preço e a disponibilidade vêm sempre da API.
 export interface CartItem {
   productId: string;
   nome: string;
@@ -7,15 +8,5 @@ export interface CartItem {
   pesoGramas: number | null;
   precoCentavos: number;
   quantidade: number;
+  disponivel: boolean;
 }
-
-export interface CartState {
-  items: CartItem[];
-}
-
-export type CartAction =
-  | { type: 'add'; item: CartItem }
-  | { type: 'setQuantity'; sku: string; quantidade: number }
-  | { type: 'remove'; sku: string }
-  | { type: 'clear' }
-  | { type: 'hydrate'; items: CartItem[] };

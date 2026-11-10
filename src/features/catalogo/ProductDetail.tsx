@@ -24,6 +24,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [moagem, setMoagem] = useState<string | null>(null);
   const [peso, setPeso] = useState<number | null>(null);
   const [added, setAdded] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
 
   const moagens = moagensDoProduto(product);
   const pesos = pesosDoProduto(product);
@@ -42,17 +43,15 @@ export function ProductDetail({ product }: ProductDetailProps) {
   if (selectionMissing) hint = 'Escolha a moagem e o peso para adicionar ao carrinho.';
   else if (outOfStock) hint = 'Esta combinação está sem estoque. Escolha outro peso ou moagem.';
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     if (!selected) return;
-    cart.addItem({
-      productId: product.id,
-      nome: product.nome,
-      sku: selected.sku,
-      moagem: selected.moagem,
-      pesoGramas: selected.pesoGramas,
-      precoCentavos: selected.precoCentavos,
-    });
-    setAdded(true);
+    setAddError(null);
+    try {
+      await cart.addItem(product.id, selected.sku);
+      setAdded(true);
+    } catch (caught) {
+      setAddError(caught instanceof Error ? caught.message : 'Não foi possível adicionar ao carrinho. Tente de novo.');
+    }
   };
 
   const preco = selected ? formatCentavos(selected.precoCentavos) : formatCentavos(precoMinimo(product) ?? 0);
@@ -104,6 +103,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </p>
 
         {hint && <p className={styles.hint}>{hint}</p>}
+        {addError && (
+          <p role="alert" className={styles.hint}>
+            {addError}
+          </p>
+        )}
 
         <button type="button" className={styles.addButton} disabled={!canAdd} onClick={handleAdd}>
           Adicionar ao carrinho
