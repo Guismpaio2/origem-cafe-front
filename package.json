@@ -7,7 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "e2e:checkout": "node e2e/e2e-checkout.mjs e2e-out",
+    "e2e:carrinho": "node e2e/e2e-cart.mjs",
+    "e2e:conta": "node e2e/e2e-conta.mjs e2e-out/conta.png",
+    "e2e:admin": "node e2e/e2e-admin.mjs e2e-out/admin.png",
+    "e2e:assinatura": "node e2e/e2e-assinatura.mjs e2e-out/assinatura.png",
+    "auditoria": "node e2e/auditoria-acessibilidade-desempenho.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -19,7 +25,9 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "axe-core": "^4.14.0",
     "oxlint": "^1.89.0",
+    "playwright": "^1.65.0",
     "typescript": "~7.0.2",
     "vite": "^8.3.5"
   }
