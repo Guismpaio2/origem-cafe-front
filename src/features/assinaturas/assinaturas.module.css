@@ -1,0 +1,71 @@
+.page {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-12);
+}
+
+.title {
+  max-width: 14ch;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.status {
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.button {
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-6);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--cerrado);
+  color: var(--cerrado-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cereja);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.success {
+  color: var(--cerrado);
+  font-weight: 600;
+}
+
+.error {
+  color: var(--cereja);
+  font-weight: 600;
+}

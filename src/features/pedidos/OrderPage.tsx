@@ -2,6 +2,8 @@ import { Link, Navigate, useParams } from 'react-router';
 import { useAuth } from '../../app/providers/auth-context';
 import { formatCentavos } from '../../shared/format/money';
 import { useAsyncData } from '../../shared/hooks/useAsyncData';
+import { useState } from 'react';
+import { ReviewForm } from '../avaliacoes/ReviewForm';
 import { fetchOrder, type OrderDto } from './pedidos.api';
 import styles from './pedidos.module.css';
 
@@ -27,6 +29,7 @@ export function OrderPage() {
   return <OrderDetails token={auth.token} id={id} />;
 }
 
+
 function OrderDetails({ token, id }: { token: string; id: string }) {
   const order = useAsyncData(`pedido:${id}`, () => fetchOrder(token, id), 'Não foi possível carregar este pedido.');
 
@@ -38,13 +41,16 @@ function OrderDetails({ token, id }: { token: string; id: string }) {
           {order.message}
         </p>
       )}
-      {order.status === 'ready' && <OrderSummary order={order.data} />}
+      {order.status === 'ready' && <OrderSummary order={order.data} token={token} />}
     </section>
   );
 }
 
-function OrderSummary({ order }: { order: OrderDto }) {
+function OrderSummary({ order, token }: { order: OrderDto; token: string }) {
   const mensagem = MENSAGEM_POR_STATUS[order.status] ?? `Status atual: ${order.status}.`;
+  const [avaliados, setAvaliados] = useState<string[]>([]);
+  const podeAvaliar = order.status === 'Entregue' || order.status === 'Retirado';
+  const produtos = [...new Map(order.items.map((item) => [item.productId, item.nome])).entries()];
 
   return (
     <>
@@ -109,6 +115,23 @@ function OrderSummary({ order }: { order: OrderDto }) {
               </li>
             ))}
           </ol>
+
+          {podeAvaliar && produtos.some(([productId]) => !avaliados.includes(productId)) && (
+            <div className={styles.block}>
+              <h2 className={styles.subtitle}>Avalie o que você recebeu</h2>
+              {produtos.map(([productId, nome]) =>
+                avaliados.includes(productId) ? null : (
+                  <ReviewForm
+                    key={productId}
+                    token={token}
+                    productId={productId}
+                    productName={nome}
+                    onSent={() => setAvaliados((current) => [...current, productId])}
+                  />
+                ),
+              )}
+            </div>
+          )}
 
           <Link to="/pedidos" className={styles.link}>
             Ver todos os meus pedidos

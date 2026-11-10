@@ -121,3 +121,35 @@
     border-left: 1px solid var(--rule);
   }
 }
+
+.secondaryButton {
+  justify-self: start;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-6);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondaryButton:disabled {
+  border-color: var(--rule);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.reviews {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--rule);
+}
+
+.reviewsTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+}

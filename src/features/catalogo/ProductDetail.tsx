@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
+import { useAuth } from '../../app/providers/auth-context';
 import { useCart } from '../../app/providers/cart-context';
+import { createSubscription } from '../assinaturas/assinaturas.api';
+import { ReviewsList } from '../avaliacoes/ReviewsList';
 import { formatCentavos } from '../../shared/format/money';
 import type { ProductDto } from './catalogo.api';
 import {
@@ -19,6 +22,9 @@ interface ProductDetailProps {
 // Este componente é recriado para cada produto (key no pai), então a escolha começa limpa.
 export function ProductDetail({ product }: ProductDetailProps) {
   const cart = useCart();
+  const auth = useAuth();
+  const [subMessage, setSubMessage] = useState<string | null>(null);
+  const [subError, setSubError] = useState<string | null>(null);
   const isCafe = product.tipo === 'cafe';
 
   const [moagem, setMoagem] = useState<string | null>(null);
@@ -54,6 +60,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
     }
   };
 
+  async function handleSubscribe() {
+    if (!selected || !auth.token) return;
+    setSubError(null);
+    setSubMessage(null);
+    try {
+      await createSubscription(auth.token, product.id, selected.sku);
+      setSubMessage('Assinatura criada. Você pode acompanhar no clube mensal.');
+    } catch (caught) {
+      setSubError(caught instanceof Error ? caught.message : 'Não foi possível criar a assinatura.');
+    }
+  }
+
   const preco = selected ? formatCentavos(selected.precoCentavos) : formatCentavos(precoMinimo(product) ?? 0);
 
   return (
@@ -76,6 +94,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
             avaliações
           </p>
         )}
+      <section className={styles.reviews} aria-labelledby="avaliacoes-titulo">
+        <h2 id="avaliacoes-titulo" className={styles.reviewsTitle}>Avaliações</h2>
+        <ReviewsList productId={product.id} version={0} />
+      </section>
       </div>
 
       <aside className={styles.buy} aria-label="Escolher e comprar">
@@ -103,6 +125,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </p>
 
         {hint && <p className={styles.hint}>{hint}</p>}
+        {isCafe && selected && auth.status === 'authenticated' && (
+          <button type="button" className={styles.secondaryButton} disabled={!selected.disponivel} onClick={() => void handleSubscribe()}>
+            Assinar mensalmente
+          </button>
+        )}
+        {isCafe && selected && auth.status !== 'authenticated' && (
+          <Link to={`/entrar?next=/produtos/${product.id}`} className={styles.cartLink}>
+            Entre para assinar este café
+          </Link>
+        )}
+        {subMessage && <p role="status" className={styles.confirm}>{subMessage}</p>}
+        {subError && <p role="alert" className={styles.hint}>{subError}</p>}
         {addError && (
           <p role="alert" className={styles.hint}>
             {addError}

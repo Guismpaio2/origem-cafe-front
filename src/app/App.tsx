@@ -8,6 +8,7 @@ import { CheckoutPage } from '../features/checkout/CheckoutPage';
 import { OrderPage } from '../features/pedidos/OrderPage';
 import { PedidosPage } from '../features/pedidos/PedidosPage';
 import { ContaPage } from '../features/conta/ContaPage';
+import { AssinaturaPage } from '../features/assinaturas/AssinaturaPage';
 import { AdminLayout } from '../features/admin/AdminLayout';
 import { AdminDashboard } from '../features/admin/AdminDashboard';
 import { AdminProducts } from '../features/admin/AdminProducts';
@@ -32,6 +33,7 @@ export function App() {
               <Route path="cadastro" element={<RegisterPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route path="conta" element={<ContaPage />} />
+              <Route path="assinatura" element={<AssinaturaPage />} />
               <Route path="admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="produtos" element={<AdminProducts />} />
