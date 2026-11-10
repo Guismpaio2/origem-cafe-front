@@ -11,4 +11,10 @@ export default defineConfig({
       '/api': 'http://localhost:3000',
     },
   },
+  // Mesmo proxy para o build de produção servido com 'npm run preview'.
+  preview: {
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
+  },
 })
