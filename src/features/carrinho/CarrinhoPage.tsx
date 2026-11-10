@@ -81,18 +81,9 @@ export function CarrinhoPage() {
         </p>
         <p className={styles.note}>O frete é calculado no checkout, pelo CEP de entrega.</p>
 
-        {auth.status === 'authenticated' ? (
-          <button type="button" className={styles.primaryButton} disabled>
-            Finalizar compra
-          </button>
-        ) : (
-          <Link to="/entrar" className={styles.primaryLink}>
-            Entrar para finalizar
-          </Link>
-        )}
-        {auth.status === 'authenticated' && (
-          <p className={styles.note}>O checkout chega na próxima etapa do projeto.</p>
-        )}
+        <Link to={auth.status === 'authenticated' ? '/checkout' : '/entrar?next=/checkout'} className={styles.primaryLink}>
+          {auth.status === 'authenticated' ? 'Finalizar compra' : 'Entrar para finalizar'}
+        </Link>
       </div>
     </section>
   );

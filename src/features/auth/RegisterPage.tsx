@@ -1,11 +1,18 @@
 import { useState, type FormEvent } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router';
 import { useAuth } from '../../app/providers/auth-context';
 import styles from './auth.module.css';
+
+// Só aceita caminhos internos (ex.: /checkout). Evita redirecionar para outro site.
+function destinoDepoisDoLogin(next: string | null): string {
+  return next && next.startsWith('/') && !next.startsWith('//') ? next : '/';
+}
 
 export function RegisterPage() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const destino = destinoDepoisDoLogin(searchParams.get('next'));
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -14,7 +21,7 @@ export function RegisterPage() {
   const [pending, setPending] = useState(false);
 
   if (auth.status === 'authenticated') {
-    return <Navigate to="/" replace />;
+    return <Navigate to={destino} replace />;
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -42,7 +49,7 @@ export function RegisterPage() {
     setPending(true);
     try {
       await auth.register({ nome: nome.trim(), email, senha, consentimentoLgpd: true });
-      navigate('/');
+      navigate(destino);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'Não foi possível criar a conta. Tente de novo.');
     } finally {
